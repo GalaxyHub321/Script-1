@@ -1,28 +1,31 @@
--- Galaxy Script Hub
-
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "Galaxy Hub | Emergency Emden", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "Galaxy Hub | Soon", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 local PlayerTab = Window:MakeTab({
-	Name = "Player",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+    Name = "Player",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
 local Section = PlayerTab:AddSection({
-	Name = "Movement"
+    Name = "Movement"
 })
 
 PlayerTab:AddSlider({
-	Name = "Walkspeed",
-	Min = 16,
-	Max = 500,
-	Default = 5,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "Speed",
-	Callback = function(Value)
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-	end    
+    Name = "Walkspeed",
+    Min = 16,
+    Max = 500,
+    Default = 16,  
+    Color = Color3.fromRGB(255,255,255),
+    Increment = 1,
+    ValueName = "Speed",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = Value
+        else
+            print("Humanoid nicht gefunden!")
+        end
+    end
 })
